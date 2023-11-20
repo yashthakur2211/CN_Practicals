@@ -1,0 +1,40 @@
+import socket
+
+def ip_to_hostname(ip_address):
+    try:
+        hostname, _, _ = socket.gethostbyaddr(ip_address)
+        return hostname
+    except socket.herror:
+        return "Unable to perform reverse DNS lookup"
+
+def hostname_to_ip(hostname):
+    try:
+        ip_address = socket.gethostbyname(hostname)
+        return ip_address
+    except socket.gaierror:
+        return "Unable to resolve host name to IP address"
+
+if __name__ == "__main__":
+    while True:
+        print("1. IP to Hostname Lookup")
+        print("2. Hostname to IP Lookup")
+        print("3. Exit")
+
+        choice = input("Enter your choice (1/2/3): ")
+
+        if choice == '1':
+            ip_address = input("Enter the IP address: ")
+            result = ip_to_hostname(ip_address)
+            print(f"Hostname: {result}")
+
+        elif choice == '2':
+            hostname = input("Enter the host name: ")
+            result = hostname_to_ip(hostname)
+            print(f"IP Address: {result}")
+
+        elif choice == '3':
+            print("Exiting the program.")
+            break
+
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
